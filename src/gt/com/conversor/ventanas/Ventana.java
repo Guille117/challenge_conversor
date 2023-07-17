@@ -1,7 +1,13 @@
 package gt.com.conversor.ventanas;
 
+import gt.com.conversor.logica.Elemento;
+import gt.com.conversor.listas.ListaDeMonedas;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +19,8 @@ import javax.swing.border.Border;
  * @author Gui
  */
 public class Ventana  extends javax.swing.JFrame{
+
+    private Iterable<Elemento> monedas;
     public  Ventana(){                                                                              // contructor de ventana
         this.setSize(800, 500);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -75,6 +83,11 @@ public class Ventana  extends javax.swing.JFrame{
         resultado.setFont(new Font("Segoe Print", Font.ITALIC, 30));
         panel1.add(resultado);
         
+
+        ListaDeMonedas listaMonedas = new ListaDeMonedas();
+        for(int i=0; i < listaMonedas.getTamaño(); i++){
+            itemsInicio.addItem(listaMonedas.retornarElemento(i).getNombreSingular());
+        }
     }
     
     private void styleComboBox(JComboBox a1, int x, int y, int a, int h){
