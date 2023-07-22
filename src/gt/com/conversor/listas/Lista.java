@@ -10,9 +10,11 @@ import java.util.ArrayList;
  */
 public class Lista {
     private ArrayList<Elemento> lis;
+    private String nombre;
     
-    public Lista(){
+    public Lista(String nombre){
         lis = new ArrayList();
+        this.nombre = nombre;
     }
     
     public void agregar(Elemento a1){
@@ -25,6 +27,10 @@ public class Lista {
     
     public Elemento getElemento(int i){
         return lis.get(i);
+    }
+    
+    public String getNombreLista(){
+        return this.nombre;
     }
     
 }

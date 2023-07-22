@@ -9,8 +9,11 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
+import static javax.swing.GroupLayout.Alignment.CENTER;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,10 +52,10 @@ public class Ventana  extends javax.swing.JFrame{
          panel1.setLayout(null);
         this.getContentPane().add(panel1);
        
-         String deTitulo = "divisas";
+        
          
          JLabel titulo = new JLabel();
-         titulo.setText("Conversor de " + deTitulo);
+         titulo.setText("Conversor de divisas");
          titulo.setFont(new Font("Georgia", Font.BOLD, 35));
          titulo.setBounds(200, 20, 450, 50);
          panel1.add(titulo);
@@ -62,18 +65,25 @@ public class Ventana  extends javax.swing.JFrame{
         // 
         JComboBox itemsInicio = new JComboBox();
         styleComboBox(itemsInicio, 80, 110, 240, 25);
+ 
         panel1.add(itemsInicio);
         
         
         // 
         JTextField cantidad = new JTextField();
         cantidad.setBounds(340, 110, 120, 30);
+        cantidad.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
+        cantidad.setHorizontalAlignment(0);
+        cantidad.setForeground(Color.green);
+        cantidad.setText("0");
         panel1.add(cantidad);
         
           // 
         JComboBox itemsFinal = new JComboBox();
         styleComboBox(itemsFinal, 480, 110, 240, 25);
         panel1.add(itemsFinal);
+        
+        
         
         // 
         JLabel etiqueta1 = new JLabel("Convetir de");
@@ -94,31 +104,39 @@ public class Ventana  extends javax.swing.JFrame{
         resultado.setFont(new Font("Segoe Print", Font.ITALIC, 30));
         panel1.add(resultado);
         
+        //itemsInicio.addActionListener(eventoConvertir(itemsInicio, itemsFinal, 0, cantidad, resultado, listas));
         
+        // valores de inicio de los JComboBox
+        llenarComboBox(itemsInicio, itemsFinal, listas, 0);
+        
+          JButton btn6 = new JButton();
+        styleBoton(btn6, 590, 350, 100, 40, "Ejecutar");
+        panel1.add(btn6);
         
         JButton btn1 = new JButton();
         styleBoton(btn1, 50, 350, 100, 40, "moneda");
-        btn1.addActionListener(eventoBoton(btn1, itemsInicio, itemsFinal, 0, listas));
+        //btn1.addActionListener(eventoBoton(btn6, itemsInicio, itemsFinal, 0, listas, titulo, cantidad, resultado));
+        btn1.addActionListener(eventoBoton(btn6, itemsInicio, itemsFinal, 0, listas, titulo, cantidad, resultado));
         panel1.add(btn1);
         
         JButton btn2 = new JButton();
         styleBoton(btn2, 155, 350, 100, 40, "liquido");
-        btn2.addActionListener(eventoBoton(btn2, itemsInicio, itemsFinal, 3, listas));
+        btn2.addActionListener(eventoBoton(btn6, itemsInicio, itemsFinal, 3, listas, titulo, cantidad, resultado));
         panel1.add(btn2);
         
         JButton btn3 = new JButton();
         styleBoton(btn3, 260, 350, 100, 40, "tiempo");
-        btn3.addActionListener(eventoBoton(btn3, itemsInicio, itemsFinal, 2, listas));
+        btn3.addActionListener(eventoBoton(btn6, itemsInicio, itemsFinal, 2, listas, titulo, cantidad, resultado));
         panel1.add(btn3);
         
         JButton btn4 = new JButton();
         styleBoton(btn4, 370, 350, 100, 40, "distancia");
-        btn4.addActionListener(eventoBoton(btn4, itemsInicio, itemsFinal, 1, listas));
+        btn4.addActionListener(eventoBoton(btn6, itemsInicio, itemsFinal, 1, listas, titulo, cantidad, resultado));
         panel1.add(btn4);
         
         JButton btn5 = new JButton();
         styleBoton(btn5, 480, 350, 100, 40, "peso");
-        btn5.addActionListener(eventoBoton(btn5, itemsInicio, itemsFinal, 4, listas));
+        btn5.addActionListener(eventoBoton(btn6, itemsInicio, itemsFinal, 4, listas, titulo, cantidad, resultado));
         panel1.add(btn5);
         
 //        ButtonGroup botones = new ButtonGroup();
@@ -127,6 +145,8 @@ public class Ventana  extends javax.swing.JFrame{
 //        botones.add(btn3);
 //        botones.add(btn4);
 //        botones.add(btn5);
+
+        
         
         
     }
@@ -143,19 +163,18 @@ public class Ventana  extends javax.swing.JFrame{
     }
     
     
-    private ActionListener eventoBoton(JButton btn, JComboBox jcb1, JComboBox jcb2, int indice, ListaGeneral lista){
+    private ActionListener eventoBoton(JButton ejecutar, JComboBox jcb1, JComboBox jcb2, int indice, ListaGeneral lista, JLabel titulo, JTextField caja, JLabel respuesta){
         
         ActionListener evento = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                ejecutar.addMouseListener(eventoConvertir(jcb1, jcb2, indice, caja, respuesta, lista));
+                setTitulo(titulo, lista, indice);
                 
                 jcb1.removeAllItems();          // limpiar items de combo box
                 jcb2.removeAllItems();
                 
-                for(int i=0; i<lista.getLista(indice).getTamaño(); i++){
-                    jcb1.addItem(lista.getLista(indice).getElemento(i).getNombreSingular());
-                    jcb2.addItem(lista.getLista(indice).getElemento(i).getNombreSingular());
-                }
+                llenarComboBox(jcb1, jcb2, lista, indice);
             }
             
         };
@@ -163,11 +182,58 @@ public class Ventana  extends javax.swing.JFrame{
         return evento;
     }
     
+    
+    private void llenarComboBox(JComboBox q1, JComboBox q2, ListaGeneral li, int j){
+        for(int i=0; i<li.getLista(j).getTamaño(); i++){
+            q1.addItem(li.getLista(j).getElemento(i).getNombreSingular());
+            q2.addItem(li.getLista(j).getElemento(i).getNombreSingular());
+        }
+    }
     private void styleBoton(JButton btn, int x, int y, int a, int h, String texto){
         btn.setBounds(x, y, a, h);
         btn.setText(texto);
 }
     
+    private void setTitulo(JLabel titulo, ListaGeneral lista, int indice){
+        titulo.setText("Conversor de " + lista.getLista(indice).getNombreLista());
+    }
+    
+    private MouseListener eventoConvertir(JComboBox inicio, JComboBox terminar, int indice, JTextField caja, JLabel etiquetaRespuesta, ListaGeneral lis){
+        MouseListener evento1 = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                 
+            Elemento convertirDe = lis.getLista(indice).getElemento(inicio.getSelectedIndex());
+            Elemento convertirA = lis.getLista(indice).getElemento(terminar.getSelectedIndex());
+            double cantidad = Double.parseDouble(caja.getText());
+            
+            Conversor con1 = new Conversor(convertirDe, convertirA, cantidad);
+            
+            String resultadoTexto = String.valueOf(con1.convertir());
+            String cantidadTexto = String.valueOf(cantidad);
+            etiquetaRespuesta.setText(cantidadTexto + convertirDe.getNombrePlural() + " equivale a : " + resultadoTexto + convertirA.getNombrePlural() );
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        
+    };
+    
+    return evento1;
+}
     
 }
 
