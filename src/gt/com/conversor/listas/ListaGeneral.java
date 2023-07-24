@@ -13,12 +13,12 @@ public class ListaGeneral {
         Lista m1 = new Lista("divisas");
         
     m1.agregar(new Elemento("quetzal", "quetzales", 1));
-    m1.agregar(new Elemento("peso mexicano", "pesos mexicanos", 2.1363));
-    m1.agregar(new Elemento("libra esterlina", "libras esterlinas", 0.0974));
-    m1.agregar( new Elemento("dolar estadounidense", "dolares estadounidenses", 0.1276));
-    m1.agregar(new Elemento("euro", "euros", 0.1136));
-    m1.agregar(new Elemento("yen", "yenes", 17.6671));
-    m1.agregar(new Elemento("won", "wones", 161.4238));
+    m1.agregar(new Elemento("peso mexicano", "pesos mexicanos", 2.1668));
+    m1.agregar(new Elemento("libra esterlina", "libras esterlinas", 0.0992));
+    m1.agregar( new Elemento("dólar estadounidense", "dólares estadounidenses", 0.1275));
+    m1.agregar(new Elemento("euro", "euros", 0.1145));
+    m1.agregar(new Elemento("yen", "yenes", 18.0823));
+    m1.agregar(new Elemento("won", "wones", 164.0845));
         
         return m1;
     }
@@ -33,7 +33,6 @@ public class ListaGeneral {
        d1.agregar(new Elemento("yarda", "yardas", 1.09361));
        d1.agregar(new Elemento("metro", "metros", 1));
        d1.agregar(new Elemento("kilómetro", "kilometros", 0.001));
-        d1.agregar(new Elemento("milla náutica", "millas náuticas", 0.000539957));
         
         return d1;
     }
@@ -41,12 +40,13 @@ public class ListaGeneral {
     private static Lista tiempos(){
         Lista t1 = new Lista("tiempo");
         
-        t1.agregar(new Elemento("segundo", "segundos", 3600));
-        t1.agregar(new Elemento("minuto", "minutos", 60));
-        t1.agregar(new Elemento("hora", "horas", 1));
-        t1.agregar(new Elemento("día", "días", 0.041666666667));
-        t1.agregar(new Elemento("semana", "semanas",0.005952380952));
-        t1.agregar(new Elemento("mes", "meses",0.001368954631));
+        t1.agregar(new Elemento("segundo", "segundos", 86400));
+        t1.agregar(new Elemento("minuto", "minutos", 3600));
+        t1.agregar(new Elemento("hora", "horas", 24));
+        t1.agregar(new Elemento("día", "días", 1));
+        t1.agregar(new Elemento("semana", "semanas",0.142857));
+        t1.agregar(new Elemento("mes", "meses",0.0328767));
+        t1.agregar(new Elemento("año", "años",0.00273973));
         
         return t1;
     }
@@ -60,20 +60,20 @@ public class ListaGeneral {
         l1.agregar(new Elemento("onza imperial", "onzas imperiales", 35.1951));
          l1.agregar(new Elemento("centímetro cúbico", "centímetros cúbicos", 1000));
         l1.agregar(new Elemento("metro cúbico", "metros cúbicos", 0.001));
-         l1.agregar(new Elemento("kilometro cúbico", "kilometros cúbicos", 0.000000000001));
+         l1.agregar(new Elemento("kilómetro cúbico", "kilómetros cúbicos", 0.000000000001));
         return l1;
     }
     
     private static Lista masas(){
         Lista m1 = new Lista("masa");
         
-        m1.agregar(new Elemento("miligramo", "miligramos", 0.001));
-        m1.agregar(new Elemento("centigramo", "centigramos", 0.01));
-        m1.agregar(new Elemento("decigramo", "decigramos", 0.1));
+        m1.agregar(new Elemento("miligramo", "miligramos", 1000));
         m1.agregar(new Elemento("gramo", "gramos", 1));
-        m1.agregar(new Elemento("decagramo", "decagramos", 10));
-        m1.agregar(new Elemento("hectogramo", "hectogramos", 100));
-        m1.agregar(new Elemento("kilogramo", "kilogramos", 1000));
+        m1.agregar(new Elemento("libra", "libras", 0.00220462));
+        m1.agregar(new Elemento("onza", "onzas", 0.035274));
+        m1.agregar(new Elemento("kilogramo", "kilogramos", 0.001));
+        m1.agregar(new Elemento("tonelada", "toneladas", 1e-6));
+        m1.agregar(new Elemento("quintal", "quintales", 1e-5));
         
         return m1;
     }
