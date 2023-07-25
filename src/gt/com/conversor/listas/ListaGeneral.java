@@ -9,16 +9,17 @@ import java.util.ArrayList;
  */
 public class ListaGeneral {
     
+    // lista de elementos
     private static Lista monedas(){
         Lista m1 = new Lista("divisas");
         
-    m1.agregar(new Elemento("quetzal", "quetzales", 1));
-    m1.agregar(new Elemento("peso mexicano", "pesos mexicanos", 2.1668));
-    m1.agregar(new Elemento("libra esterlina", "libras esterlinas", 0.0992));
-    m1.agregar( new Elemento("dólar estadounidense", "dólares estadounidenses", 0.1275));
-    m1.agregar(new Elemento("euro", "euros", 0.1145));
-    m1.agregar(new Elemento("yen", "yenes", 18.0823));
-    m1.agregar(new Elemento("won", "wones", 164.0845));
+    m1.agregar(new Elemento("quetzal", "quetzales", 1));                                                                                    // unidad de referencia
+    m1.agregar(new Elemento("peso mexicano", "pesos mexicanos", 2.1668));                                           //  1 quetzal = 2.1668 pes...
+    m1.agregar(new Elemento("libra esterlina", "libras esterlinas", 0.0992));                                               // 1 quetzal = 0.0992  lib....
+    m1.agregar( new Elemento("dólar estadounidense", "dólares estadounidenses", 0.1275));           // 1 quetzal = 0.1275 dol.....
+    m1.agregar(new Elemento("euro", "euros", 0.1145));                                                                                      // 1 quetzal = 0.1145  eros
+    m1.agregar(new Elemento("yen", "yenes", 18.0823));                                                                                      // 1 quetzal = 18.0823  yenes
+    m1.agregar(new Elemento("won", "wones", 164.0845));                                                                                 // 1 quetrzal = 164.0845 wones
         
         return m1;
     }
@@ -41,7 +42,7 @@ public class ListaGeneral {
         Lista t1 = new Lista("tiempo");
         
         t1.agregar(new Elemento("segundo", "segundos", 86400));
-        t1.agregar(new Elemento("minuto", "minutos", 3600));
+        t1.agregar(new Elemento("minuto", "minutos", 1440));
         t1.agregar(new Elemento("hora", "horas", 24));
         t1.agregar(new Elemento("día", "días", 1));
         t1.agregar(new Elemento("semana", "semanas",0.142857));
@@ -65,9 +66,9 @@ public class ListaGeneral {
     }
     
     private static Lista masas(){
-        Lista m1 = new Lista("masa");
+        Lista m1 = new Lista("masa");           
         
-        m1.agregar(new Elemento("miligramo", "miligramos", 1000));
+        m1.agregar(new Elemento("miligramo", "miligramos", 1000));    
         m1.agregar(new Elemento("gramo", "gramos", 1));
         m1.agregar(new Elemento("libra", "libras", 0.00220462));
         m1.agregar(new Elemento("onza", "onzas", 0.035274));
@@ -81,16 +82,16 @@ public class ListaGeneral {
     private ArrayList<Lista> lisGeneral;
 
     public ListaGeneral() {
-        lisGeneral = new ArrayList();
+        lisGeneral = new ArrayList();                      // creamos una lista de listas
         
-        lisGeneral.add(monedas());
+        lisGeneral.add(monedas());              // agregamos las listas a la lista
         lisGeneral.add(distancias());
         lisGeneral.add(tiempos());
         lisGeneral.add(liquidos());
         lisGeneral.add(masas());
     }
     
-    public Lista getLista(int i){
+    public Lista getLista(int i){                                      // retornamos lista sub i
         return lisGeneral.get(i);
     }
     

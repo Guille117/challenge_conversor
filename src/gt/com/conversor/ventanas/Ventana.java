@@ -257,6 +257,32 @@ public class Ventana  extends javax.swing.JFrame{
      * @return                      retornamos un ActionListener
      */
     
+    private ActionListener eventoBoton(JButton ejecutar, JComboBox jcb1, JComboBox jcb2, int indice, ListaGeneral lista, JLabel titulo, JTextField caja, JLabel respuesta){
+        
+            ActionListener evento = new ActionListener(){       // implementamos una interfaz ActionListener
+                @Override
+                public void actionPerformed(ActionEvent e) {        // implementamos sus métodos
+                    respuesta.setText(" ");                 // limpiamos la etiqueta de respuesta
+                    caja.setText("0");
+                    
+                    ejecutar.addMouseListener(eventoConvertir(jcb1, jcb2, indice, caja, respuesta, lista));     // agregamos un evento al botón ejecutar
+                    ejecutar.setEnabled(true);              // encedemos el botón
+                    
+                    setTitulo(titulo, lista, indice);           // llamamos al método setTitulo, 
+                
+                    jcb1.removeAllItems();          // limpiar items de combo box
+                    jcb2.removeAllItems();
+                
+                   llenarComboBox(jcb1, jcb2, lista, indice);       // llenamos los comboBox
+            }
+            
+        };
+        
+        return evento;
+        
+    }
+    
+    
     
     /**
      * Evento que usaremos para cambiar el estilo del boton que pulsemos, recorremos una lista de botones y comparamos cada boton,
@@ -283,29 +309,9 @@ public class Ventana  extends javax.swing.JFrame{
         return eventoC;
     }
     
-    private ActionListener eventoBoton(JButton ejecutar, JComboBox jcb1, JComboBox jcb2, int indice, ListaGeneral lista, JLabel titulo, JTextField caja, JLabel respuesta){
-        
-            ActionListener evento = new ActionListener(){       // implementamos una interfaz ActionListener
-                @Override
-                public void actionPerformed(ActionEvent e) {        // implementamos sus métodos
-                    respuesta.setText(" ");                 // limpiamos la etiqueta de respuesta
-                    
-                    ejecutar.addMouseListener(eventoConvertir(jcb1, jcb2, indice, caja, respuesta, lista));     // agregamos un evento al botón ejecutar
-                    ejecutar.setEnabled(true);              // encedemos el botón
-                    
-                    setTitulo(titulo, lista, indice);           // llamamos al método setTitulo, 
-                
-                    jcb1.removeAllItems();          // limpiar items de combo box
-                    jcb2.removeAllItems();
-                
-                   llenarComboBox(jcb1, jcb2, lista, indice);       // llenamos los comboBox
-            }
-            
-        };
-        
-        return evento;
-        
-    }
+    
+    
+    
     
     
     /**

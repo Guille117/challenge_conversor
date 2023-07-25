@@ -9,18 +9,10 @@ public class Elemento {
     private final String nombrePlural;
     private double valorDeReferencia;
     
-    private void setValorDeReferencia(double valorDeReferencia){
-        if(valorDeReferencia > 0){
-          this.valorDeReferencia = valorDeReferencia;  
-        }else{
-            System.out.println("Valor inicial incorrecto!");
-        }
-    }
-    
-    public Elemento(String nombreSingular, String nombrePlural, double valorInicial){
+    public Elemento(String nombreSingular, String nombrePlural, double valorDeReferencia){
         this.nombreSingular = nombreSingular;
         this.nombrePlural = nombrePlural;
-        setValorDeReferencia(valorInicial);
+        this.valorDeReferencia = valorDeReferencia;
     }
     
     public String getNombreSingular(){
